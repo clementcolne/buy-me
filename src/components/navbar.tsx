@@ -1,33 +1,60 @@
 'use client';
 
-import { Layout, Menu, theme } from 'antd';
+import { AppstoreOutlined, MailOutlined } from '@ant-design/icons';
+import { Layout, Menu, MenuProps } from 'antd';
+import { useState } from 'react';
 
-const { Header } = Layout;
+const items: MenuProps['items'] = [
+  {
+    label: 'Accueil',
+    key: 'home',
+    icon: <MailOutlined />,
+    style: { float: 'right' },
+  },
+  {
+    label: 'Enchères',
+    key: 'auctions',
+    icon: <MailOutlined />,
+    style: { float: 'right' },
+  },
+  {
+    label: 'Profil',
+    key: 'profile',
+    icon: <AppstoreOutlined />,
+    style: { marginLeft: 'auto' },
+    children: [
+      {
+        label: 'Mon compte',
+        key: 'account',
+      },
+      {
+        label: 'Réglages',
+        key: 'setting',
+      },
+      {
+        label: 'Déconnexion',
+        key: 'disconnect',
+      },
+    ],
+  },
+];
 
 const NavBar: React.FC = () => {
+  const [current, setCurrent] = useState('mail');
+
+  const onClick: MenuProps['onClick'] = (e) => {
+    console.log('click ', e);
+    setCurrent(e.key);
+  };
+
   return (
     <Layout>
-      <Header
-        style={{
-          position: 'sticky',
-          top: 0,
-          zIndex: 1,
-          width: '100%',
-          display: 'flex',
-          alignItems: 'center',
-        }}
-      >
-        <div className="demo-logo" />
-        <Menu
-          theme="dark"
-          mode="horizontal"
-          defaultSelectedKeys={['1']}
-          items={new Array(3).fill(null).map((_, index) => ({
-            key: String(index + 1),
-            label: `nav ${index + 1}`,
-          }))}
-        />
-      </Header>
+      <Menu
+        onClick={onClick}
+        selectedKeys={[current]}
+        mode="horizontal"
+        items={items}
+      />
     </Layout>
   );
 };

@@ -1,25 +1,30 @@
 'use client';
 
+import './style.css';
+
 import React from 'react';
 import { Card } from 'antd';
 import { Button, Form, Input } from 'antd';
+import { redirect } from 'next/navigation';
 
-import './style.css';
-
-const onFinish = (values: any) => {};
+const onFinish = (values: any) => {
+  redirect('/login');
+};
 
 const onFinishFailed = (errorInfo: any) => {
   console.log('Failed:', errorInfo);
 };
 
 type FieldType = {
+  firstName?: string;
+  lastName?: string;
   username?: string;
   password?: string;
   remember?: string;
 };
 
-const LoginComponent = () => (
-  <Card title="Connexion" className="card" bordered={false}>
+const RegisterComponent = () => (
+  <Card title="Créer un compte" className="card" bordered={false}>
     <Form
       name="basic"
       labelCol={{ span: 8 }}
@@ -30,6 +35,21 @@ const LoginComponent = () => (
       onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
+      <Form.Item<FieldType>
+        label="Prénom"
+        name="firstName"
+        rules={[{ required: true, message: 'Veuillez entrer votre prénom' }]}
+      >
+        <Input />
+      </Form.Item>
+      <Form.Item<FieldType>
+        label="Nom"
+        name="lastName"
+        rules={[{ required: true, message: 'Veuillez entrer votre nom' }]}
+      >
+        <Input />
+      </Form.Item>
+
       <Form.Item<FieldType>
         label="Mail"
         name="username"
@@ -50,11 +70,11 @@ const LoginComponent = () => (
 
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
         <Button type="primary" htmlType="submit">
-          Connexion
+          Créer mon compte
         </Button>
       </Form.Item>
     </Form>
   </Card>
 );
 
-export default LoginComponent;
+export default RegisterComponent;

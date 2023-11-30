@@ -1,5 +1,5 @@
 body {
-  background: #fbfbfb;
+  background: #ededed;
   margin: 0;
 }
 
@@ -7,4 +7,8 @@ body {
   margin-left: 10%;
   margin-right: 10%;
   margin-top: 20px;
+}
+
+.card {
+  border-radius: 15px;
 }
