@@ -1,6 +1,11 @@
 import { NextResponse } from 'next/server';
 
+import { sql } from '@vercel/postgres';
+
 export async function GET() {
+  const { rows, fields } = await sql`SELECT * FROM "user"`;
+  return NextResponse.json(rows);
+
   const res = {
     title: 'Ingénieur logiciel full stack',
     startTime: Date.now(),
