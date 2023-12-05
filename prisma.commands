@@ -1,0 +1,5 @@
+// appliquer les migrations
+npx prisma migrate deploy
+
+// mettre à jour le schema selon les changements de la base 
+npx prisma db pull
