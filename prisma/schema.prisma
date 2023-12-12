@@ -14,4 +14,25 @@ model account {
   firstName String    @db.VarChar(255)
   lastName  String    @db.VarChar(255)
   type      String    @db.VarChar(255)
+  auction   auction[]
+  bid       bid[]
+}
+
+model auction {
+  id         Int       @id @unique @default(autoincrement())
+  title      String?   @db.VarChar(255)
+  subject_id Int
+  created    DateTime? @default(now()) @db.Timestamp(6)
+  account    account   @relation(fields: [subject_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  bid        bid[]
+}
+
+model bid {
+  id         Int       @id @unique @default(autoincrement())
+  bidder_id  Int
+  auction_id Int
+  amount     Int
+  created    DateTime? @default(now()) @db.Timestamp(6)
+  auction    auction   @relation(fields: [auction_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  account    account   @relation(fields: [bidder_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
