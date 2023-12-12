@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Card, Divider } from 'antd';
 import { Statistic } from 'antd';
 
@@ -7,28 +7,17 @@ import Resume from './resume';
 import { DollarOutlined } from '@ant-design/icons';
 import AuctionDrawer from './auction-drawer';
 
-function AuctionCard() {
+const AuctionCard = (act: Auction) => {
   const [drawerOpened, setdrawerOpened] = useState(false);
-
-  const [auction, setAuction] = useState<any>(null);
-  const [isLoading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch('/api/auction')
-      .then((res) => res.json())
-      .then((data) => {
-        setAuction(data);
-        setLoading(false);
-      });
-  }, []);
+  console.log(act);
 
   return (
-    <Card title={auction?.title} hoverable={true}>
+    <Card title={act?.title} hoverable={true}>
       <CountDown start={Date.now()} />
       <Divider />
       <Statistic
         title="Offre la plus haute actuelle"
-        value={37500}
+        value={act.bid[0].amount}
         suffix={'€ / an'}
       />
       <Divider />
@@ -40,10 +29,6 @@ function AuctionCard() {
       {drawerOpened && <AuctionDrawer />}
     </Card>
   );
-}
-
-function MyComponent() {
-  return <p>This is my component.</p>;
-}
+};
 
 export default AuctionCard;
