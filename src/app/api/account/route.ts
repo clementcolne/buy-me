@@ -4,11 +4,7 @@ import { PrismaClient } from '@prisma/client';
 export async function GET() {
   const prisma = new PrismaClient();
 
-  const auctions = await prisma.auction.findMany({
-    include: {
-      bid: true,
-    },
-  });
+  const accounts = await prisma.account.findMany();
 
-  return NextResponse.json(auctions);
+  return NextResponse.json(accounts);
 }

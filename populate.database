@@ -1,0 +1,13 @@
+INSERT INTO public.account(
+	email, "firstName", "lastName", type)
+	VALUES ('clement.colne@outlook.com', 'Clément', 'Colné', 'EMPLOYEE'), 
+		   ('bernard@bernard.fr', 'Bernard', 'Bernard', 'COMPANY');
+
+INSERT INTO public.auction(
+	title, subject_id)
+	VALUES ('Software Engineer', 1);
+
+INSERT INTO public.bid(
+	bidder_id, auction_id, amount)
+	VALUES (2, 1, 37500),
+		   (2, 1, 39500);
