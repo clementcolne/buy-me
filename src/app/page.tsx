@@ -1,6 +1,7 @@
 'use client';
 
 import AuctionCard from '@/components/shared/auction-card';
+import SignInButton from '@/components/shared/signin-button';
 
 import { Col, Row, theme } from 'antd';
 import { Content } from 'antd/es/layout/layout';
@@ -12,6 +13,7 @@ export default function Home() {
 
   return (
     <Content>
+      <SignInButton />
       <div className="main-container">
         <Row gutter={20}>
           <Col span={8}>
